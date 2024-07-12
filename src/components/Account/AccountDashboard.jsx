@@ -3,18 +3,15 @@ import React, { useState } from 'react'
 import {
     View,
     Text,
-    TextInput,
     StyleSheet,
     TouchableOpacity,
-    ActivityIndicator,
 } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AccountOrders from './AccountOrders';
 import AccountDownload from './AccountDownload';
 import AccountDetails from './AccountDetails';
 import AccountSeller from './AccountSeller';
-import FAQ from '../../pages/FAQ';
-import ContactUs from '../../pages/ContactUs';
+import FAQ from './FAQ';
+import ContactUs from './ContactUs';
 import AccountDashbaordItem from './AccountDashbaordItem';
 import AccountBecomeASeller from './AccountBecomeASeller';
 import AccountAddress from './AccountAddress';

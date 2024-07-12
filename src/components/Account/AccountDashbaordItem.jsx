@@ -18,10 +18,6 @@ const styles = StyleSheet.create({
 
     container: {
         padding: 1,
-        // backgroundColor: '#fff',
-        // borderWidth: 1,
-        // borderColor: '#ccc',
-        // width:"100%"
     },
     menuItem: {
         paddingVertical: 10,

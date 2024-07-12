@@ -27,6 +27,7 @@ const DrawerComp = () => {
       await AsyncStorage.removeItem('token');
       await AsyncStorage.removeItem('email');
       navigation.replace('LoginScreen');
+      
     } catch (error) {
       Alert.alert('Logout Error', 'Something went wrong');
     }

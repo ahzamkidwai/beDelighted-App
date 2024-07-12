@@ -109,7 +109,7 @@ export default FaceOilandBalm;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f5f5f5',
   },
   listContainer: {
     paddingHorizontal: 10,
@@ -123,25 +123,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: '#ddd',
-    // borderRadius: 8,
+    borderRadius: 8,
     justifyContent: 'space-between',
   },
   catImage: {
     width: 150,
     height: 150,
-    // borderRadius: 8,
+    borderRadius: 8,
   },
   catTitle: {
     marginTop: 10,
-    fontSize: 14,
+    fontSize: 16,
+    textAlign: 'center',
     fontWeight: 'bold',
-    color: '#0066cc',
+    color: '#333',
   },
   catPrice: {
-    marginTop: 4,
+    marginTop: 5,
     fontSize: 14,
-    // textAlign: 'center',
-    color: 'black',
+    textAlign: 'center',
+    color: '#888',
   },
   filterContainer: {
     flexDirection: 'row',

@@ -1,18 +1,8 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Button,
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Button } from 'react-native';
 
-const CartProductContent = ({}) => {
+const CartProductContent = ({ }) => {
   const [add, setAdd] = useState(0);
-  const [toggle, setToggle] = useState(false);
 
   const dummyProducts = [
     {
@@ -20,25 +10,22 @@ const CartProductContent = ({}) => {
       name: 'Moisturizer',
       price: '$999.00',
       description: 'Sold By: Be Delighted Dev',
-      image:
-        'https://i.pinimg.com/474x/d2/08/74/d208747ef26352b15742c515acbff79a.jpg',
+      image: 'https://i.pinimg.com/474x/d2/08/74/d208747ef26352b15742c515acbff79a.jpg',
       total: '$999.00',
       originalPrice: '$1200.00',
-      save: '$201.00',
+      save: '$201.00'
     },
   ];
 
   return (
     <>
+    
       {dummyProducts.map(product => (
         <View key={product.id} style={styles.card}>
-          <Image source={{uri: product.image}} style={styles.image} />
+          <Image source={{ uri: product.image }} style={styles.image} />
           <View style={styles.details}>
             <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.price}>
-              <Text style={styles.originalPrice}>{product.originalPrice}</Text>{' '}
-              {product.price}
-            </Text>
+            <Text style={styles.price}><Text style={styles.originalPrice}>{product.originalPrice}</Text> {product.price}</Text>
 
             <Text style={styles.cashback}>SAVE {product.save}</Text>
             <Text style={styles.description}>{product.description}</Text>
@@ -64,19 +51,12 @@ const CartProductContent = ({}) => {
   );
 };
 
+
 export default CartProductContent;
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-
-    alignItems: 'center',
-    marginVertical: 20,
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-  },
   container: {
     // padding: 10,
-    padding: 0,
+    padding:0,
     // marginBottom:10,
     // backgroundColor: '#f5f5f5',
   },
@@ -92,14 +72,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: 0,
-    marginBottom: 12,
+    marginBottom:12
   },
   buttonText: {
     fontSize: 24,
     fontWeight: 'normal',
     color: 'black',
   },
-
+  card: {
+    borderRadius: 10,
+    elevation: 2,
+    backgroundColor: 'white',
+    marginVertical: 10,
+    marginHorizontal: 20,
+    overflow: 'hidden',
+    width: 400,
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom:0
+  },
   cashback: {
     width: 120,
     height: 25,
@@ -111,13 +102,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'black'
   },
   image: {
     padding: 0,
     margin: 0,
     width: 180,
-    height: 250,
+    height: 270,
   },
   details: {
     marginTop: 10,
@@ -125,7 +116,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   name: {
-    // fontFamily: 'Montserrat-Regular',
     fontSize: 24,
     fontWeight: 'bold',
     marginVertical: 5,
@@ -156,4 +146,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: '#ff9800',
   },
-});
+})

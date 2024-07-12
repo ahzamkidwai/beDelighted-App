@@ -1,17 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const CartHeader = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewicon}>
-        <AntDesign
-          name="creditcard"
-          size={40}
-          color="#0066cc"
-          style={styles.socialIcon}
-        />
+        <Text>
+          <AntDesign name="creditcard" size={40} color="#db4437" style={styles.socialIcon} />
+        </Text>
       </View>
       <View>
         <Text style={styles.text}>Upon placing this order a cashback of</Text>
@@ -19,37 +16,34 @@ const CartHeader = () => {
         <Text style={styles.text}>will be credited to your wallet.</Text>
       </View>
     </View>
-  );
-};
+  )
+}
 
 export default CartHeader;
 
 const styles = StyleSheet.create({
   container: {
-    // margin: 2,
-    // padding: 10,
-    // display: 'flex',
+    width: 398,
+    justifyContent: 'flex-start',
+    margin: 2,
+    padding: 10,
+    display: 'flex',
     flexDirection: 'row',
-    // alignItems: 'center',
-    gap: 60,
-    //justifyContent: 'space-evenly',
-    width: '100%',
     // marginRight: 3,
-    // gap: 30,
-    backgroundColor: '#f6f5f8',
+    gap:30,
+    backgroundColor: 'lightgrey',
     borderTopWidth: 5,
-    borderBlockStartColor: '#1e85be',
+    borderBlockStartColor: 'blue'
   },
   socialIcon: {
-    // marginHorizontal: 30,
+    margin: 10,
     textAlign: 'center',
     cursor: 'pointer',
-    color: '#1e85be',
-    fontSize: 20,
-    paddingHorizontal: 10,
+    color: 'blue',
+    fontSize: 25
   },
   viewicon: {
-    // marginLeft: 5,
+    marginLeft: 5,
   },
   text: {
     fontSize: 16,
@@ -59,10 +53,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   Icon: {
-    // width: 40,
-    // height: 30,
-    // borderWidth: 2,
-    // borderColor: 'blue',
-    // backgroundColor: 'white',
-  },
-});
+    width: 40,
+    height: 30,
+    borderWidth: 2,
+    borderColor: "blue",
+    backgroundColor: "white",
+
+  }
+
+})

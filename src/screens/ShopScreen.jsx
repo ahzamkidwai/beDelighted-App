@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Collapsible from 'react-native-collapsible';
-import {useNavigation} from '@react-navigation/native';
-import {fetchAllProducts} from '../services/all_products';
-import {fetchProductSearchResults} from '../services/search_products';
+import { useNavigation } from '@react-navigation/native';
+import { fetchAllProducts } from '../services/all_products';
+import { fetchProductSearchResults } from '../services/search_products';
 
 const ShopScreen = () => {
+
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -65,18 +66,6 @@ const ShopScreen = () => {
             'Eye Masks & Patches',
           ],
         },
-        {
-          title: 'Kits & Combos',
-          items: ['Kits & Gift Sets', 'Facial Kits'],
-        },
-        {
-          title: 'Cleansers',
-          items: ['Face Scrubs & Exfoilators', 'Face Wash & Cleansers'],
-        },
-        {
-          title: 'Toners',
-          items: ['Rose Water', 'Face tonners & Mist'],
-        },
       ],
     },
     {
@@ -92,24 +81,8 @@ const ShopScreen = () => {
           ],
         },
         {
-          title: 'Eyes',
+          title: 'Eye',
           items: ['Kajal & Kohls', 'Eyeliner', 'Eye shadow'],
-        },
-        {
-          title: 'Lips',
-          items: ['Lip Gloss', 'Lip Liner', 'Lip Plumper & Primers'],
-        },
-        {
-          title: 'Nails',
-          items: ['Nail Art', 'Nail Polish', 'Nail Polish Remover'],
-        },
-        {
-          title: 'Tools & Brushes',
-          items: ['Brush & Brush Sets', 'Sponge & Applicators', 'Mirrors'],
-        },
-        {
-          title: 'Makeup Kits',
-          items: [],
         },
       ],
     },
@@ -126,29 +99,8 @@ const ShopScreen = () => {
             'Hair Color',
             'Hair Cream. Packs  Masks',
             'Shampoo',
-            'Hair Oil',
-            'Hair Serum',
+            'Hair Oil & Serum',
           ],
-        },
-        {
-          title: 'Hair Cream, Packs & Masks',
-          items: [],
-        },
-        {
-          title: 'Hair Care Kits & Giftsets',
-          items: [],
-        },
-        {
-          title: 'Shampoo',
-          items: [],
-        },
-        {
-          title: 'Hair Oil',
-          items: [],
-        },
-        {
-          title: 'Hair Serum',
-          items: [],
         },
       ],
     },
@@ -175,9 +127,9 @@ const ShopScreen = () => {
               width: '90%',
               borderWidth: 1,
               borderColor: '#ddd',
-              paddingLeft: 20,
+              paddingLeft: 10,
               color: '#636363',
-              fontFamily: 'Montserrat-Regular',
+              fontFamily: 'Montserrat',
               letterSpacing: 0.6,
               justifyContent: 'flex-start',
             }}
@@ -191,7 +143,7 @@ const ShopScreen = () => {
             <Ionicons
               name="search"
               size={24}
-              // color="white"
+              color="#3F6065"
               style={styles.searchIcon}
             />
           </TouchableOpacity>
@@ -204,9 +156,10 @@ const ShopScreen = () => {
   );
 };
 
-const Accordion = ({title, items}) => {
+const Accordion = ({ title, items }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const navigation = useNavigation();
+
   const categoryMap = {
     'Face oils & Balm': 'FaceOilandBalm',
     'Face moisturizer & day cream': 'MoisturizerandDayCream',
@@ -215,28 +168,26 @@ const Accordion = ({title, items}) => {
     'Face Masks & Packs': 'FaceMaskPack',
     'Sheet Masks': 'SheetMask',
     'Sleeping Masks': 'SleepingMask',
-    'Under Eye Cream, Gel & Serum': 'SkinCare',
+    'Under Eye Cream, Gel & Serum': 'UnderEyeRoll',
     'Under Eye Roll On': 'UnderEyeRoll',
     'Eye Masks & Patches': 'EyePatches',
     'BB & CC Cream': 'BBCream',
-    Blush: 'Blush',
-    Highlighters: 'Highlighters',
-    'Setting Spray & Fixers': 'SkinCare',
-    'Kajal & Kohls': 'SkinCare',
-    Eyeliner: 'SkinCare',
-    'Eye shadow': 'SkinCare',
-    'Head Massager': 'SkinCare',
-    'Hair Color': 'SkinCare',
-    'Hair Cream. Packs  Masks': 'SkinCare',
-    Shampoo: 'SkinCare',
-    'Hair Oil': 'SkinCare',
-    'Hair Serum': 'SkinCare',
+    'Blush': 'Blush',
+    'Highlighters': 'Highlighters',
+    'Setting Spray & Fixers': 'Fixers',
+    'Kajal & Kohls': 'Kajal',
+    'Eyeliner': 'EyeLiner',
+    'Eye shadow': 'EyeShadow',
+    'Head Massager': 'HairTools',
+    'Hair Color': 'HairDyeColor',
+    'Shampoo': 'Shampoo',
+    'Hair Oil & Serum': 'HairOil & Serum',
   };
 
   const handlePress = item => {
     const screenName = categoryMap[item];
     if (screenName) {
-      navigation.navigate(screenName, {category: item});
+      navigation.navigate(screenName, { category: item });
     }
   };
 
@@ -248,7 +199,7 @@ const Accordion = ({title, items}) => {
         <Text style={styles.headerText}>{title}</Text>
         <Text style={styles.toggleIcon}>{isCollapsed ? '+' : '-'}</Text>
       </TouchableOpacity>
-      <Collapsible collapsed={isCollapsed} style={{backgroundColor: '#666666'}}>
+      <Collapsible collapsed={isCollapsed}>
         <View style={styles.content}>
           {items.map((item, index) =>
             typeof item === 'string' ? (
@@ -273,19 +224,17 @@ export default ShopScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
   },
   accordionContainer: {
-    // marginBottom: 10,
+    marginBottom: 10,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
-    paddingVertical: 14,
+    padding: 10,
     backgroundColor: '#f1f1f1',
-    // borderBottomWidth: 1,
-    // borderBottomColor: '#ddd',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   headerText: {
     fontSize: 16,
@@ -295,13 +244,11 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   toggleIcon: {
-    fontSize: 20,
+    fontSize: 16,
     color: 'black',
   },
-
   content: {
     padding: 10,
-    // backgroundColor: '#f9f9f9',
     backgroundColor: '#f9f9f9',
     color: 'black',
     fontWeight: '300',
@@ -312,11 +259,10 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   subItemText: {
-    color: '#666666',
+    color: 'black',
   },
   searchIcon: {
     padding: 8,
-    color: 'white',
-    backgroundColor: 'black',
+    color: '#3F6065',
   },
 });

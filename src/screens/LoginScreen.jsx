@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Logo from '../assets/bedelighted-logo.png';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useContext, useState} from 'react';
 import globalStyles from '../styles/globalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,7 +23,10 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigation = useNavigation();
-  const {setToken}  =  useContext(AuthContext)
+  const {setToken,redirectPath}  =  useContext(AuthContext)
+  const route = useRoute();
+  const {redirectTo} = route.params || false;
+  console.log("paramsOne:",route.params)
 
   // const handleGuestLogin = () => {
   //   navigation.navigate('GuestScreen');
@@ -35,53 +38,57 @@ export default function LoginScreen() {
   };
 
   const handleLogin = async () => {
-    if (!validateEmail(email)) {
-      setErrorMessage('Please enter a valid email address');
-      return;
-    }
-    if (!password) {
-      setErrorMessage('Please enter your password');
-      return;
-    }
+    // if (!validateEmail(email)) {
+    //   setErrorMessage('Please enter a valid email address');
+    //   return;
+    // }
+    // if (!password) {
+    //   setErrorMessage('Please enter your password');
+    //   return;
+    // }
 
-    setLoading(true);
-    setErrorMessage('');
-    try {
-      const response = await fetch(
-        'https://native.bedelighted.afucent.com/wp-json/jwt-auth/v1/token',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: email,
-            password: password,
-          }),
-        },
-      );
+    // setLoading(true);
+    // setErrorMessage('');
+    // try {
+    //   const response = await fetch(
+    //     'https://native.bedelighted.afucent.com/wp-json/jwt-auth/v1/token',
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({
+    //         username: email,
+    //         password: password,
+    //       }),
+    //     },
+    //   );
 
-      const data = await response.json();
+    //   const data = await response.json();
 
-      if (response.ok) {
-        let userToken = await AsyncStorage.setItem('token', data.token);
-        await AsyncStorage.setItem('email', email);
-        console.log("userToken",data.token);
-        setToken(data.token);
+    //   if (response.ok) {
+    //     let userToken = await AsyncStorage.setItem('token', data.token);
+    //     await AsyncStorage.setItem('email', email);
+    //     console.log("userToken",data.token);
+        setToken("Adnan");
+        // setToken(data.token);
+        // if (redirectTo) {
+        //   console.log(redirectTo,"redirectTo");
+          navigation.navigate(redirectTo);
+    //     // } else {
+    //     //   navigation.replace('Main');
+    //     // } 
 
-        navigation.replace('Main');
-      } else {
-        console.log('Error:', data);
-        setErrorMessage('Please check your credentials.');
-      }
-    } catch (error) {
-      console.log('Login Error:', error);
-      setErrorMessage('Login error. Something went wrong.');
-    } finally {
-      setLoading(false);
-    }
-   
-    
+    //   } else {
+    //     console.log('Error:', data);
+    //     setErrorMessage('Please check your credentials.');
+    //   }
+    // } catch (error) {
+    //   console.log('Login Error:', error);
+    //   setErrorMessage('Login error. Something went wrong.');
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (

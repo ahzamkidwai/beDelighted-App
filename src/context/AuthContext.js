@@ -7,7 +7,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [tokenforUser,setToken] = useState(null);
-  console.log("tokenss",tokenforUser);
+  // console.log("tokenss",tokenforUser);
+  const [redirectPath, setRedirectPath] = useState(null);
 
 
   const login = async (username, password) => {
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, checkAuth ,setToken,tokenforUser}}>
+    <AuthContext.Provider value={{ user, login, logout, checkAuth ,setToken,tokenforUser,redirectPath, setRedirectPath}}>
       {children}
     </AuthContext.Provider>
   );

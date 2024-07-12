@@ -6,7 +6,7 @@ import {
   Dimensions,
   SafeAreaView,
 } from 'react-native';
-import React, {useEffect, useRef, useState, useCallback} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -59,20 +59,15 @@ export default function Carousel() {
     return (
       <View key={index} style={styles.itemContainer}>
         <Image style={styles.image} source={{uri: item.collection_image}} />
-        <View style={styles.dotContainer}>{renderDotIndicator()}</View>
       </View>
     );
   };
 
-  const viewabilityConfig = {
-    itemVisiblePercentThreshold: 50,
+  const handleScroll = event => {
+    const scrollPosition = event.nativeEvent.contentOffset.x;
+    const index = Math.floor(scrollPosition / screenWidth);
+    setActiveIndex(index);
   };
-
-  const onViewableItemsChanged = useCallback(({viewableItems}) => {
-    if (viewableItems.length > 0) {
-      setActiveIndex(viewableItems[0].index);
-    }
-  }, []);
 
   const renderDotIndicator = () => {
     return CarouselData.map((dot, index) => (
@@ -96,9 +91,9 @@ export default function Carousel() {
         renderItem={renderItem}
         horizontal={true}
         pagingEnabled={true}
-        onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig}
+        onScroll={handleScroll}
       />
+      <View style={styles.dot}>{renderDotIndicator()}</View>
     </SafeAreaView>
   );
 }
@@ -112,30 +107,25 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   contentContainer: {},
-  itemContainer: {
-    position: 'relative',
-  },
+  itemContainer: {},
   image: {
     height: 300,
     width: screenWidth,
   },
-  dotContainer: {
-    position: 'absolute',
-    bottom: 10,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
   dotindicator: {
-    backgroundColor: 'white',
+    backgroundColor: 'grey',
     height: 10,
     width: 10,
     borderRadius: 5,
     marginHorizontal: 6,
   },
+  dot: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
   activedotindicator: {
-    backgroundColor: '#fcb800',
+    backgroundColor: 'black',
     height: 10,
     width: 10,
     borderRadius: 5,

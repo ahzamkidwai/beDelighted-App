@@ -41,13 +41,9 @@ const categories = [
 ];
 const HomeCategories = () => {
   const renderItem = ({item}) => (
-    <View style={{marginHorizontal: 2}}>
-      <View style={styles.catContainer}>
-        <Image source={{uri: item.image}} style={styles.catImage} />
-        <View style={styles.bannerContainer}>
-          <Text style={styles.catText}>{item.title}</Text>
-        </View>
-      </View>
+    <View style={styles.catContainer}>
+      <Image source={{uri: item.image}} style={styles.catImage} />
+      <Text style={styles.catText}>{item.title}</Text>
     </View>
   );
 
@@ -59,12 +55,12 @@ const HomeCategories = () => {
           fontFamily: 'Fidena',
           fontSize: 16,
           letterSpacing: 0.6,
-          fontWeight: '600',
+          fontWeight: 300,
           color: 'black',
         }}>
-        Top Categories of the month
+        Top Category of the month
       </Text>
-      <View style={{}}>
+      <View style={styles.container}>
         <FlatList
           data={categories}
           renderItem={renderItem}
@@ -83,30 +79,22 @@ const styles = StyleSheet.create({
   catContainer: {
     flex: 1,
     alignItems: 'center',
-    margin: 1,
-    padding: 5,
+    margin: 10,
+    padding: 10,
     borderWidth: 1,
     borderColor: '#ddd',
     // borderRadius: 8,
     justifyContent: 'space-between',
   },
   catImage: {
-    width: 180,
+    width: 150,
     height: 180,
     // borderRadius: 8,
   },
   catText: {
-    // marginTop: 10,
+    marginTop: 10,
     fontSize: 16,
     textAlign: 'center',
-    color: '#666666',
-  },
-  bannerContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    backgroundColor: 'white',
-    paddingVertical: 8,
-    alignItems: 'center',
+    color: '#000000',
   },
 });

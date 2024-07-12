@@ -4,72 +4,93 @@ import {
   Image,
   TextInput,
   Pressable,
-  Switch,
+  FlatList,
+  TouchableOpacity,
+  Text,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Logo from '../assets/bedelighted-logo.png';
 import {useNavigation} from '@react-navigation/native';
+import CartScreen from '../screens/CartScreen';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Text} from 'react-native-paper';
-
-const HomeHeader = ({toggleButton, setToggleButton}) => {
+import LoginScreen from '../screens/LoginScreen';
+import {useSelector} from 'react-redux';
+const HomeHeader = () => {
   const navigation = useNavigation();
+  const allProducts = useSelector(state => state.allProducts.products);
+  let [suggestions, setSuggestions] = useState([]);
 
-  const toggleSwitch = () => {
-    setToggleButton(!toggleButton);
+  const handleChange = value => {
+    if (value.trim() === '') {
+      setSuggestions([]);
+    } else {
+      let searchSuggestion =
+        allProducts &&
+        allProducts.length > 0 &&
+        allProducts.filter(el =>
+          el.title.toLowerCase().includes(value.toLowerCase()),
+        );
+      setSuggestions(searchSuggestion);
+      console.log(setSuggestions(searchSuggestion))
+    }
   };
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
         <Image style={styles.logo} source={Logo} />
-        <View style={{flexDirection: 'column', alignItems: 'center'}}>
-          <Switch
-            trackColor={{false: '#406066', true: '#e6e6e6'}}
-            thumbColor={toggleButton ? '#406066' : '#f4f3f4'}
-            onValueChange={toggleSwitch}
-            value={toggleButton}
-          />
-          {toggleButton ? (
-            <Text style={{color: '#406066', fontWeight: '700'}}> Shop </Text>
-          ) : (
-            <Text style={{color: '#406066', fontWeight: '700'}}> Trial</Text>
-          )}
+        <View style={styles.iconContainer}>
+         
+          <Pressable onPress={() => navigation.navigate('Drawer')}>
+            <FontAwesome name="align-justify" size={18} color="#3F6065" />
+          </Pressable>
         </View>
       </View>
       <View
         style={{
-          flexDirection: 'row',
-          alignItems: 'center',
           justifyContent: 'center',
+          flexDirection: 'row',
         }}>
-        <View style={styles.iconContainer}>
-          <Pressable onPress={() => navigation.navigate('Drawer')}>
-            <FontAwesome name="align-justify" size={22} color="#3F6065" />
-          </Pressable>
-        </View>
-
         <TextInput
           style={{
             height: 40,
-            width: '80%',
+            width: '90%',
             borderWidth: 1,
             borderColor: '#ddd',
             paddingLeft: 10,
             color: 'gray',
-            // justifyContent: 'flex-start',
-            fontFamily: 'Fidena',
+            justifyContent: 'flex-start',
+            fontFamily: 'Montserrat',
             letterSpacing: 0.6,
           }}
           placeholder="I'm shopping for..."
+          onChangeText={handleChange}
         />
         <Ionicons
           name="search"
           size={24}
-          // color="#3F6065"
+          color="#3F6065"
           style={styles.searchIcon}
         />
       </View>
+
+      {suggestions && suggestions.length > 0 && (
+        <View style={styles.suggestionsContainer}>
+          <FlatList
+            data={suggestions}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                onPress={() => console.log('Selected:', item.title)}>
+                <View style={styles.suggestionItem}>
+                  <Text>{item.title}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -121,7 +142,6 @@ const styles = StyleSheet.create({
   searchIcon: {
     padding: 6.5,
     color: 'white',
-    backgroundColor: '#406066',
-    // justifyContent: 'flex-end',
+    backgroundColor: '#3F6065',
   },
 });

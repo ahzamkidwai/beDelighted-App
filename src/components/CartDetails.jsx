@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
   checkoutButton: {
     backgroundColor: '#2d3e50',
     paddingVertical: 15,
-    borderRadius: 8,
+    borderRadius: 5,
     marginTop: 20,
     marginBottom: 20,
     alignItems: 'center',
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
   },
   proceedButton: {
     // backgroundColor: '#2d3e50',
-    // borderRadius: 10,
+    // borderRadius: 0,
     // width:'100%',
     // marginTop: 10,
     // marginBottom: 10,
